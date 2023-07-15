@@ -5,14 +5,38 @@ public class HaloDDP {
         int BASE_PRICE = 5000; 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Selamat datang Haloddp. Berapa ukuran lemari obat hari ini? (max row 5) ");
+        System.out.println("Selamat datang Haloddp. Berapa ukuran lemari obat hari ini? (max row 5) ");
+        String ukuran = input.nextLine();
+        String[] parts = ukuran.split("x");
 
+        int row = 0;
+        int column = 0;
         // TODO : Implementasi validasi input ukuran lemari
+        if (parts.length == 2) {
+            row = Integer.parseInt(parts[0]);
+            column = Integer.parseInt(parts[1]);
+        } else {
+            System.out.println("Invalid input");
+        }
 
         // TODO : Buat objek lemari dengan ukuran yang sudah ditentukan
+        Lemari lemari = new Lemari(row);
 
         System.out.println("Silahkan tentukan kategori obat untuk setiap rak");
         // TODO : Implementasi input kategori rak
+        for (int i = 0; i < row; i++) {
+            System.out.print("Rak ke-" + (i+1) + " : ");
+            String kategori = input.nextLine();
+            Rak rak = new Rak(column, kategori);
+            lemari.addRak(rak, i);
+            System.out.println("Rak ke-" + (i+1) + " adalah rak obat " + kategori);
+        }
+
+        System.out.println("Rak obat hari ini: ");
+    for (int i = 0; i < row; i++ ){
+        System.out.println();
+        for(int j = 0; j<column; j++);
+    }
 
         while (true) {
             System.out.println();
