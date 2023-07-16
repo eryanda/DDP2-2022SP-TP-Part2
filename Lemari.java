@@ -28,6 +28,6 @@ public class Lemari {
 
     // TODO : Implementasi method getRak
     public Rak getRak(int i) {
-        return null;
+        return rak[i];
     }
 }

@@ -6,17 +6,27 @@ public class HaloDDP {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Selamat datang Haloddp. Berapa ukuran lemari obat hari ini? (max row 5) ");
-        String ukuran = input.nextLine();
-        String[] parts = ukuran.split("x");
-
+        boolean valid = false;
         int row = 0;
         int column = 0;
-        // TODO : Implementasi validasi input ukuran lemari
-        if (parts.length == 2) {
-            row = Integer.parseInt(parts[0]);
-            column = Integer.parseInt(parts[1]);
-        } else {
-            System.out.println("Invalid input");
+        while(!valid){
+            String ukuran = input.nextLine();
+            String[] parts = ukuran.split("x");
+
+            // TODO : Implementasi validasi input ukuran lemari
+            if (parts.length == 2) {
+                row = Integer.parseInt(parts[0]);
+                column = Integer.parseInt(parts[1]);
+                if (row < 1 || column < 1){
+                    System.out.println("Ukuran lemari tidak bisa < 1");
+                    System.exit(0);
+                }
+                valid = true;
+            } else {
+                System.out.println("Format lemari tidak sesuai. Seharusnya <row>x<column>");
+                System.exit(0);
+            }
+
         }
 
         // TODO : Buat objek lemari dengan ukuran yang sudah ditentukan
@@ -33,10 +43,19 @@ public class HaloDDP {
         }
 
         System.out.println("Rak obat hari ini: ");
-    for (int i = 0; i < row; i++ ){
-        System.out.println();
-        for(int j = 0; j<column; j++);
-    }
+        for (int i = 0; i < row; i++ ){
+            Rak rak = lemari.getRak(i);
+            System.out.println(rak.getKategoriRak());
+            rak.printRak();
+        }
+
+        // for (Rak rak : lemari ) {
+        //     System.out.println("Rak dengan kategori " + rak.getKategoriRak());
+        // }
+        
+
+        // Rak rak = rak.getKategoriRak()
+        // System.out.println(rak.getKategoriRak());
 
         while (true) {
             System.out.println();
@@ -50,6 +69,7 @@ public class HaloDDP {
 
             if (menu.equals("1")) {
                 // TODO : Implementasi input obat
+
             } else if (menu.equals("2")) {
                 // TODO : Implementasi print obat
             } else if (menu.equals("3")) {

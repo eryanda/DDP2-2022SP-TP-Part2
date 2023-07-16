@@ -11,7 +11,7 @@ public class Rak {
 
     // TODO : Implementasi method getKategoriRak
     public String getKategoriRak() {
-        return "";
+        return kategori;
     }
 
     // TODO : Implementasi method tambahObat
@@ -21,12 +21,22 @@ public class Rak {
     
     // TODO : Implementasi method printRak
     public void printRak(){
+        System.out.println("==================");
+        for (int i = 0; i < daftarObat.length; i++){
+            String namaObat = "Kosong";
+            if (daftarObat[i] != null){
+                namaObat = daftarObat[i].getNama();
+            }
+            System.out.print("| " + namaObat + " ");
+        }
+        System.out.println();
+        System.out.println("==================\n");
         return;
     }
 
     // TODO : Implementasi method getListObat
     public Obat[] getListObat() {
-        return null;
+        return daftarObat;
     }
     
 }
