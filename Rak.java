@@ -58,4 +58,30 @@ public class Rak {
         }
         return null;
     }
+
+    public boolean containsObat(Obat obat) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (daftarObat[j] != null && daftarObat[j].getNama().equals(obat.getNama())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean beliObat(Obat obat, int jumlah) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (daftarObat[j] != null && daftarObat[j].getNama().equals(obat.getNama())) {
+                    if (daftarObat[j].getStok() >= jumlah) {
+                        daftarObat[j].setStok(daftarObat[j].getStok() - jumlah);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
