@@ -5,11 +5,12 @@ public class HaloDDP {
         int BASE_PRICE = 5000; 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Selamat datang Haloddp. Berapa ukuran lemari obat hari ini? (max row 5) ");
         boolean valid = false;
         int row = 0;
         int column = 0;
+        String [] daftarKategori = new String [row + 1];
         while(!valid){
+            System.out.println("Selamat datang Haloddp. Berapa ukuran lemari obat hari ini? (max row 5) ");
             String ukuran = input.nextLine();
             String[] parts = ukuran.split("x");
 
@@ -21,6 +22,7 @@ public class HaloDDP {
                     System.out.println("Ukuran lemari tidak bisa < 1");
                     System.exit(0);
                 }
+                System.out.println("Rak obat hari ini berukuran " + ukuran);
                 valid = true;
             } else {
                 System.out.println("Format lemari tidak sesuai. Seharusnya <row>x<column>");
@@ -32,7 +34,7 @@ public class HaloDDP {
         // TODO : Buat objek lemari dengan ukuran yang sudah ditentukan
         Lemari lemari = new Lemari(row);
 
-        System.out.println("Silahkan tentukan kategori obat untuk setiap rak");
+        System.out.println("\nSilahkan tentukan kategori obat untuk setiap rak");
         // TODO : Implementasi input kategori rak
         for (int i = 0; i < row; i++) {
             System.out.print("Rak ke-" + (i+1) + " : ");
@@ -69,13 +71,64 @@ public class HaloDDP {
 
             if (menu.equals("1")) {
                 // TODO : Implementasi input obat
+                System.out.print("Masukkan nama obat: ");
+                String namaObat = input.nextLine();
+                System.out.print("Masukkan kategori obat: ");
+                String kategoriObat = input.nextLine();
+                int indexRak = -1;
+                for(int i = 0; i<= row; i++){
+                    if (daftarKategori[i].equals(kategoriObat)){
+                        System.out.println("Kategori obat valid");
+                        indexRak = i-1;
+                        break;
+                    }
+                }
+                if(indexRak == -1){
+                    System.out.println("Kategori obat tidak valid");
+                    continue;
+                }
+                 
+                System.out.print("Masukkan posisi obat: ");
+                String posObat = input.nextLine();
+                String [] index = posObat.split(",");
+                int baris = Integer.parseInt(index[0]);
+                int kolom = Integer.parseInt(index[1]);
+                if (baris > row || kolom > column){
+                    System.out.println("Posisi tidak ada di lemari");
+                    continue;
+                }
+
+                System.out.print("Masukkan stok obat: ");
+                int stokObat = input.nextInt();
+                input.nextLine();
+                Obat obat = new Obat(namaObat, stokObat, kategoriObat);
+                System.out.print("Masukkan nomor rak (1-" + row + "): ");
+                int nomorRak = input.nextInt();
+                input.nextLine(); // Handle newline character after nextInt()
+                Rak rak = lemari.getRak(nomorRak - 1);
+
+                // if (rak != null) {
+                //     rak.tambahObat(obat);
+                //     System.out.println("Obat berhasil ditambahkan ke rak " + nomorRak);
+                // } else {
+                //     System.out.println("Nomor rak tidak valid.");
+                // }
+
+
 
             } else if (menu.equals("2")) {
                 // TODO : Implementasi print obat
+
             } else if (menu.equals("3")) {
                 // TODO : Implementasi beli obat
+                System.out.print("Obat apa yang ingin dibeli? ");
+                String beliObat = input.nextLine();
+                System.out.print("Ingin beli berapa banyak? ");
+                int banyakObat = input.nextInt();
+
             } else if (menu.equals("99")){
                 // TODO : Implementasi keluar
+
                 break;
             } else {
                 System.out.println("Menu tidak tersedia");
@@ -83,6 +136,7 @@ public class HaloDDP {
         }
 
         input.close();
+
         System.out.println("Terima kasih telah menggunakan Haloddp!");
     }
 }

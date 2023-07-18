@@ -16,7 +16,12 @@ public class Rak {
 
     // TODO : Implementasi method tambahObat
     public void tambahObat(Obat obat, int index) {
-        this.daftarObat[index] = obat;
+        if (daftarObat[index] == null) {
+            daftarObat[index] = obat;
+            System.out.println("Obat berhasil ditambahkan");
+        } else {
+            System.out.println("Rak sudah terisi obat");
+        }
     }
     
     // TODO : Implementasi method printRak
@@ -38,5 +43,19 @@ public class Rak {
     public Obat[] getListObat() {
         return daftarObat;
     }
-    
+
+    public int getSize (){
+        return size;
+    }
+
+    public Obat searchObat(String namaObat) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (daftarObat[j] != null && daftarObat[j].getNama().equals(namaObat)) {
+                    return daftarObat[j];
+                }
+            }
+        }
+        return null;
+    }
 }
